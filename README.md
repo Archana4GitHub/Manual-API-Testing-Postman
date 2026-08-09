@@ -1,81 +1,118 @@
 # Manual API Testing with Postman
 
-## 📌 Project Overview
+## Overview
 
-This project demonstrates **manual REST API testing using Postman**. The APIs were tested by performing CRUD operations and validating request data, response data, HTTP status codes, headers, and error responses.
+This project contains manual API testing performed using **Postman**. I tested the Google Maps Place APIs and covered the basic CRUD operations: Create, Read, Update, and Delete.
 
-The project is designed to demonstrate practical knowledge of **REST API testing and Postman**.
+## APIs Tested
 
-## 🛠️ Tools & Technologies
+| Operation    | Method | Endpoint                      |
+| ------------ | ------ | ----------------------------- |
+| Add Place    | POST   | `/maps/api/place/add/json`    |
+| Get Place    | GET    | `/maps/api/place/get/json`    |
+| Update Place | PUT    | `/maps/api/place/update/json` |
+| Delete Place | DELETE | `/maps/api/place/delete/json` |
 
-* **Postman** – API testing
-* **REST API** – API architecture
-* **JSON** – Request and response data format
-* **Git** – Version control
-* **GitHub** – Source code and project repository
+## Add Place – POST
 
-## 🔄 CRUD Operations Tested
+Used to create a new place.
 
-| Operation | HTTP Method | Purpose                     |
-| --------- | ----------- | --------------------------- |
-| Create    | POST        | Create a new resource       |
-| Read      | GET         | Retrieve resource details   |
-| Update    | PUT         | Update an existing resource |
-| Delete    | DELETE      | Delete a resource           |
+**URL:**
 
-## 🧪 Testing Performed
+```text
+https://rahulshettyacademy.com/maps/api/place/add/json?key=qaclick123
+```
 
-### Functional Testing
+**Sample Request:**
 
-* Verified API functionality for CRUD operations
-* Validated request payloads
-* Validated response payloads
-* Verified expected API behavior
+```json
+{
+  "location": {
+    "lat": -38.383494,
+    "lng": 33.427362
+  },
+  "accuracy": 50,
+  "name": "Frontline house",
+  "phone_number": "(+91) 983 893 3937",
+  "address": "29, side layout, cohen 09",
+  "types": [
+    "shoe park",
+    "shop"
+  ],
+  "website": "http://google.com",
+  "language": "French-IN"
+}
+```
 
-### Status Code Validation
+I verified the response status and captured the `place_id` for the next requests.
 
-Validated appropriate HTTP response codes, including:
+## Get Place – GET
 
-* `200 OK`
-* `201 Created`
-* `400 Bad Request`
-* `404 Not Found`
+Used to retrieve the details of an existing place.
 
-### Request Validation
+```text
+https://rahulshettyacademy.com/maps/api/place/get/json?place_id={place_id}&key=qaclick123
+```
 
-* Request URL
-* HTTP method
-* Headers
-* Query parameters
-* Path parameters
-* Request body
+The `place_id` is taken from the Add Place response.
 
-### Response Validation
+## Update Place – PUT
 
-* Response status code
-* Response body
-* Response headers
-* Response structure
-* Response data
+Used to update an existing place.
 
-### Positive Test Scenarios
+```text
+https://rahulshettyacademy.com/maps/api/place/update/json?key=qaclick123
+```
 
-* Valid request data
-* Valid resource ID
-* Successful resource creation
-* Successful resource retrieval
-* Successful resource update
-* Successful resource deletion
+**Sample Request:**
 
-### Negative Test Scenarios
+```json
+{
+  "place_id": "{place_id}",
+  "address": "70 Summer walk, USA",
+  "key": "qaclick123"
+}
+```
 
-* Invalid request data
-* Invalid resource ID
-* Missing required fields
-* Invalid parameters
-* Non-existing resource requests
+After updating, I used the Get Place API to verify that the changes were reflected.
 
-## 📂 Project Structure
+## Delete Place – DELETE
+
+Used to delete an existing place.
+
+```text
+https://rahulshettyacademy.com/maps/api/place/delete/json?key=qaclick123
+```
+
+**Sample Request:**
+
+```json
+{
+  "place_id": "{place_id}"
+}
+```
+
+After deletion, the Get Place API can be used to verify that the place is no longer available.
+
+## Testing Covered
+
+* CRUD operations
+* Request and response validation
+* HTTP status code validation
+* Query and path parameters
+* JSON request/response validation
+* Positive test scenarios
+* Negative test scenarios
+
+## Tools
+
+* Postman
+* REST API
+* JSON
+* Git
+* GitHub
+
+## Project Structure
 
 ```text
 Manual-API-Testing-Postman/
@@ -86,29 +123,9 @@ Manual-API-Testing-Postman/
 └── README.md
 ```
 
-## 📦 Postman Collection
-
-The exported Postman collection is available in the `postman` folder.
-
-You can import the collection into Postman and execute the API requests to reproduce the testing scenarios.
-
-## 🎯 Key Learning Outcomes
-
-* Understanding REST API architecture
-* Working with HTTP methods
-* Performing CRUD operations
-* Validating API requests and responses
-* Understanding HTTP status codes
-* Performing positive and negative API testing
-* Using Postman for manual API testing
-* Managing API testing collections
-* Using Git and GitHub for version control
-
-## 👩‍💻 Author
+## Author
 
 **Archana**
-
 QA Engineer | Automation & API Testing
 
-GitHub: https://github.com/Archana4GitHub
-
+[GitHub](https://github.com/Archana4GitHub)
